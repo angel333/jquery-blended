@@ -1,0 +1,102 @@
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en'>
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+	<title>Blended - jQuery plugin</title>
+	<link rel='stylesheet' type='text/css' href='http://yui.yahooapis.com/3.1.1/build/cssreset/reset-min.css'>
+	<link rel='stylesheet' type='text/css' href='http://yui.yahooapis.com/3.1.1/build/cssfonts/fonts-min.css'>
+	<style type='text/css' media='all'>
+
+		.cleaner { clear: both; }
+		body { background: white; margin: 10px; font-family: arial; }
+		#slideshow { margin: auto; }
+		div#container { text-align: left; margin: auto; width: 800px; padding: 25px 15px; }
+		
+		a { color: black; }
+		a:hover { text-decoration: none; }
+	
+		h1 { font-size: 2em; }
+		h2 { font-size: 1.3em; }
+		h3 { font-size: 1.2em; }
+		h4 { font-size: 1.1em; }
+		
+		code, pre { background: black; padding: 5px; color: white; margin: 5px 0; overflow: auto; }
+		
+		p { margin: 10px 0; }
+		h1, h2, h3, h4 { margin: 20px 0 10px 0; font-weight: bold; }
+		
+		ul { padding-left: 20px; }
+		li { list-style-type: square; }
+	
+		strong { font-weight: bold; }
+		
+	</style>
+	<script type='text/javascript' src='http://www.google.com/jsapi'></script>
+	<script type='text/javascript'>
+		//<![CDATA[
+		google.load('jquery', '1.4.2');
+		//]]>
+	</script>
+	<script type='text/javascript' src='jquery.blended.js'></script>
+	<script type='text/javascript'>
+		//<![CDATA[
+		$(document).ready(function() {
+			$('#slideshow').blendedCarousel({
+				width: 800,
+				height: 333,
+				mousePanning: true
+			});
+		});
+		//]]>
+	</script>
+
+</head>
+<body>
+
+	<div id='container'>
+
+		<h1>Blended - jQuery plugin</h1>
+		<p><i>A carousel with images blended together (mask effect).</i></p>
+		<p>Author: <strong><a href='http://ondrejsimek.com'>Ondrej Simek</a></strong></p>
+
+		<h3>Download</h3>
+		<p>The latest version can be downloaded <strong><a href='http://github.com/angel333/jquery-blended/raw/master/jquery.blended.js' title='GitHub' target='_blank'>here</a></strong>, or by clonning the <a href='http://github.com/angel333/jquery-blended' title='blended repository' target='_blank'>repository</a>. Then just initialize blended like this:</p>
+		<pre>&lt;script type='text/javascript' src='/js/jquery.blended.js'&gt;&lt;/script&gt;</pre>
+
+		<h2>Example</h2>
+
+		<div id='slideshow'>
+			<img src='photos/1.jpg'/>
+			<img src='photos/2.jpg'/>
+			<img src='photos/3.jpg'/>
+			<img src='photos/4.jpg'/>
+			<img src='photos/5.jpg'/>
+			<img src='photos/6.jpg'/>
+		</div>
+		
+		<pre>$(document).ready(function() {
+	$('#slideshow').blendedCarousel({
+		width: 800,
+		height: 333,
+		mousePanning: true
+	});
+});</pre>
+	
+		<h2>TODO, bugs, feature requests</h2>
+		<ul>
+			<li>Automatic animation</li>
+			<li>Animate panning with an easing</li>
+			<li>Allowing to set easing for blends</li>
+			<li>Vertical carousels</li>
+			<li>Clickable images (linking to e.g. lighboxes, etc.)</li>
+			<li>External controls (buttons)</li>
+			<li>Documentation!</li>
+		</ul>
+		<p>As you can see, it's not done yet and it needs some work.. So feel free to fork it! :)</p>
+		
+		<h2>Credits</h2>
+		<p>Thanks to <strong><a href='http://seanklingelhoefer.blogspot.com' title='Sean Klingelhoefer' target='_blank'>Sean Klingelhoefer</a></strong> for permission to use <a href='http://seanklingelhoefer.blogspot.com/2009/07/self-promotion-lexus-is-f.html' title='Lexus IS-F' target='_blank'>these wonderful Lexus photos</a> in the demo.</p>
+
+	</div>
+
+</body>
+</html>
