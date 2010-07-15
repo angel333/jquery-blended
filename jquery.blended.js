@@ -1,6 +1,7 @@
 /**
  * Blended
  * A carousel with images blended together (mask effect).
+ *
  * Author: Ondrej Simek ( http://ondrejsimek.com )
  */
 
@@ -13,6 +14,7 @@
 		var o = $.extend({}, $.fn.blendedCarousel.defaults, options);
 		
 		return this.each(function() {
+
 			var $carousel = $(this);
 			var imagesCount = $carousel.children().filter('img').length;
 			$carousel.blendedOptions = o;
@@ -28,42 +30,32 @@
 			
 			$carousel.children().filter('img').each(function(index) {
 				var $image = $(this);
-				$image.css({'display':'none'});
 
 				var side = 'left';
 				if (index === 0)
-					var side = 'none';
+					side = 'none';
 
-				i = 0;
 				$image.blendedSide({
 					side: side,
 					onComplete: function($blendedContainer) {
-						i++;
-						if (i !== 1) {
+						if (index !== 0) {
 							$blendedContainer.css({
 								'margin-left': - o.blendSize - 4 // white spaces
 							});
 							window.blended = $blendedContainer;
 						}
-
-						if (imagesCount === i) {
-							// mouse panning
-							if (o.mousePanning) {
-								var maxScroll = (
-									$blendedContainer.position().left
-									+ $blendedContainer.width()
-									- $carousel.width()
-								);
-								
-								$carousel.mousemove(function(e) {
-									var x = ((e.pageX - this.offsetLeft) / this.clientWidth * maxScroll);
-									$carousel.scrollLeft(x);
-								});
-							}
-						}
 					}
 				});
 			});
+
+			// mouse panning
+			if (o.mousePanning) {
+				$carousel.mousemove(function(e) {
+					var maxScroll = this.scrollWidth - this.clientWidth;
+					var x = ((e.pageX - this.offsetLeft) / this.clientWidth * maxScroll);
+					$carousel.scrollLeft(x);
+				});
+			}
 
 		});
 	};
@@ -74,14 +66,13 @@
 		var o = $.extend({}, $.fn.blendedSide.defaults, options);
 
 		return this.each(function() {
-
+			
 			var $image = $(this);
-			$image.load(function() {
+			$image.one('load', function() {
 
 				var height = $image.height();
 				var width = $image.width();
 				var backImg = 'url('+$image[0].src+')';
-				//var backImg = 'black';
 				var $d = $('<div></div>').css({
 					'position': 'absolute'
 				});
@@ -199,6 +190,13 @@
 				if (o.onComplete) { o.onComplete($container); };
 
 			});
+
+			// without this, firefox is unable to blend the images
+			// if they're already cached.
+			//if ($image.complete || ($.browser.msie && parseInt($.browser.version === 6))) {
+			if (this.complete) {
+				$image.trigger('load');
+			};
 
 		});
 	}
