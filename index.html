@@ -37,6 +37,7 @@
 		//]]>
 	</script>
 	<script type='text/javascript' src='http://github.com/angel333/jquery-blended/raw/master/jquery.blended.js'></script>
+	<!--<script type='text/javascript' src='jquery.blended.js'></script>-->
 	<script type='text/javascript'>
 		//<![CDATA[
 		$(document).ready(function() {
@@ -83,7 +84,7 @@
 			<img src='photos/6.jpg'/>
 		</div>
 		
-		<pre>$(document).ready(function() {
+	<pre>$(document).ready(function() {
 	$('#slideshow').blendedCarousel({
 		width: 800,
 		height: 333,
@@ -91,12 +92,23 @@
 	});
 });</pre>
 
+		<pre>&lt;div id='slideshow'>
+	&lt;img src='photos/1.jpg'/&gt;
+	&lt;img src='photos/2.jpg'/&gt;
+	...
+&lt;/div&gt;</pre>
+
 		<h2>Browser compatibility</h2>
-		<p><strong>Doesn't work in IE and Firefox!</strong></p>
+		<p>Tested in:</p>
+		<ul>
+			<li>Opera 10.60</li>
+			<li>Chrome 5</li>
+			<li>Firefox 3.6.6</li>
+		</ul>
+		<p><strong>Doesn't work in IE!</strong></p>
 	
 		<h2>TODO</h2>
 		<ul>
-			<li>Firefox support!</li>
 			<li>Internet Explorer support</li>
 			<li>Automatic animation</li>
 			<li>Animate panning with an easing</li>
