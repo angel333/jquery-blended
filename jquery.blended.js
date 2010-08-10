@@ -48,6 +48,13 @@
 				});
 			});
 
+			// mouse in, mouse out
+			$carousel.hover(function(e) {
+				$carousel.mouseIsThere = true;
+			}, function(e) {
+				$carousel.mouseIsThere = false;
+			});
+
 			// mouse panning
 			if (o.mousePanning) {
 				$carousel.mousemove(function(e) {
@@ -55,6 +62,22 @@
 					var x = ((e.pageX - this.offsetLeft) / this.clientWidth * maxScroll);
 					$carousel.scrollLeft(x);
 				});
+			}
+
+			// autoscrolling
+			if (o.autoscroll) {
+				// true is right, false is left
+				$carousel.scrollDirectionRight = true;
+				$carousel.autoScrollIntervalId = setInterval(function($carousel, o) {
+					if ($carousel.mouseIsThere) {
+						return;
+					}
+					var maxScroll = $carousel.context.scrollWidth - $carousel.context.clientWidth;
+					if ($carousel.context.scrollLeft >= maxScroll || $carousel.context.scrollLeft <= 0) {
+						$carousel.scrollDirectionRight = !$carousel.scrollDirectionRight;
+					}
+					$carousel.context.scrollLeft += $carousel.scrollDirectionRight ? o.autoscrollStep : -o.autoscrollStep;
+				}, o.autoscrollInterval, $carousel, o)
 			}
 
 		});
@@ -206,6 +229,9 @@
 	$.fn.blendedCarousel.defaults = {
 		width: 500,
 		height: 250,
+		autoscroll: true,
+		autoscrollInterval: 30,
+		autoscrollStep: 1, // in pixels
 		blendSize: 100,
 		mousePanning: true
 	};
